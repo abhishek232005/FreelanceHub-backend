@@ -3,13 +3,14 @@ const app = express()
 const port = 4000
 const path = require('path')
 const cors = require("cors")
-require('../backend/db/mongoose')
+const connectDB = require('../backend/db/mongoose')
 const userroute = require('../backend/routes/user')
 const categaryRoute = require('../backend/routes/category')
 const subcategaryRoute = require('../backend/routes/subcategary')
 app.use(express.json())
 app.use("/upload",express.static(path.join(__dirname,"./upload")))
 
+connectDB
 // CORS Fix
 app.use(
   cors({
@@ -21,6 +22,7 @@ app.use(
     credentials: true
   })
 );
+
 
 app.use('/',userroute)
 app.use('/',categaryRoute)
