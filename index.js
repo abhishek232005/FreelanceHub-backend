@@ -10,11 +10,17 @@ const subcategaryRoute = require('../backend/routes/subcategary')
 app.use(express.json())
 app.use("/upload",express.static(path.join(__dirname,"./upload")))
 
+// CORS Fix
 app.use(
-    cors({
-      origin: 'http://localhost:3000',
-    })
-  );
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://freelance-hub-frontend-six.vercel.app"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+  })
+);
 
 app.use('/',userroute)
 app.use('/',categaryRoute)
